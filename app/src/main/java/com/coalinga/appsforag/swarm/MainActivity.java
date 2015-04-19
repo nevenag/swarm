@@ -1,5 +1,6 @@
 package com.coalinga.appsforag.swarm;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,15 +70,16 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.report) {
-            return true;
-            // return
-        } else if(id == R.id.my_area){
-            return true;
+        switch(item.getItemId()){
+            case R.id.report:
+                return true;
+            case R.id.my_area:
+                Intent intent = new Intent(this, MyAreaActivity.class);
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-
-        return super.onOptionsItemSelected(item);
     }
 }
