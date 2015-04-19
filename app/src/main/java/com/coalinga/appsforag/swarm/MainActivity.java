@@ -1,5 +1,9 @@
 package com.coalinga.appsforag.swarm;
 
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
+import com.parse.SaveCallback;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -20,15 +28,60 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        currentId = 1;
+
         final Button buttonYes = (Button) findViewById(R.id.button_yes);
         buttonYes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Perform action on click
+                // Acquire a reference to the system Location Manager
+                Log.i(SwarmApplication.TAG, "clicked YES");
+                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+                // Define a listener that responds to location updates
+                LocationListener locationListener = new LocationListener() {
+                    public void onLocationChanged(Location location) {
+                        Log.i(SwarmApplication.TAG, "getting location");
+                        // Called when a new location is found by the network location provider.
+                        Event event = new Event();
+                        Log.i(SwarmApplication.TAG, "currentID " + currentId);
+                        event.setPestType(currentId);
+                        event.setLocation(new ParseGeoPoint(location.getLatitude(), location.getLongitude()));
+                        event.saveInBackground( new SaveCallback() {
+                                                  @Override
+                                                  public void done(ParseException e) {
+                                                      if (e == null) {
+                                                          Log.i(SwarmApplication.TAG, "Saved event");
+                                                      } else {
+                                                          Toast.makeText(
+                                                                  getApplicationContext(),
+                                                                  "Error saving: " + e.getMessage(),
+                                                                  Toast.LENGTH_SHORT).show();
+                                                      }
+                                                  }
+                                              }
+
+                        );
+                    }
+
+                    public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+                    public void onProviderEnabled(String provider) {}
+
+                    public void onProviderDisabled(String provider) {}
+                };
+
+                // Register the listener with the Location Manager to receive location updates
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+
+                incrementImage();
             }
         });
+
         final Button buttonNo = (Button) findViewById(R.id.button_no);
         buttonNo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Log.i(SwarmApplication.TAG, "current " +currentId);
                 incrementImage();
             }
         });
