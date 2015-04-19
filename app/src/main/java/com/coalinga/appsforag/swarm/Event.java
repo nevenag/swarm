@@ -14,25 +14,25 @@ import java.util.Map;
 @ParseClassName("Event")
 public class Event extends ParseObject {
 
-    public static final Map<String, Integer> pests;
+    public static final Map<Integer, String> pests;
     static {
-        pests = new HashMap<String, Integer>();
+        pests = new HashMap<Integer, String>();
         // Our pest/farm item database
-        pests.put("Beet Armyworm",1);
-        pests.put("Beet Leafhopper",2);
-        pests.put("Botrytis",3);
-        pests.put("Navel Orange Worm",4);
-        pests.put("Pacific Spider Mite",5);
-        pests.put("Peach Twig Borer",6);
-        pests.put("Stink Bugs",7);
-        pests.put("Thirp",8);
-        pests.put("Whitefly",9);
-        pests.put("London Rocket",10);
-        pests.put("Powdery Mildew",11);
-        pests.put("Russian Thistle",12);
-        pests.put("Aluminum Pipe Theft",13);
-        pests.put("Copper Wire Theft",14);
-        pests.put("Honey Bee",15);
+        pests.put(1,"beet_armyworm");
+        pests.put(2,"beet_leafhopper");
+        pests.put(3,"botrytis");
+        pests.put(4,"navel_orange_worm");
+        pests.put(5,"pacific_spider_mite");
+        pests.put(6,"peach_twig_borer");
+        pests.put(7,"stink_bugs");
+        pests.put(8,"thrip");
+        pests.put(9,"whitefly");
+        pests.put(10,"london_rocket");
+        pests.put(11,"powdery_mildew");
+        pests.put(12,"russian_thistle");
+        pests.put(13,"aluminum_pipe_theft");
+        pests.put(14,"copper_wire_theft");
+        pests.put(15,"honey_bee");
     }
 
     public Event() {
@@ -59,7 +59,7 @@ public class Event extends ParseObject {
         return getInt("type");
     }
 
-    public static Map<String, Integer> getPests(){
+    public static Map<Integer, String> getPests(){
         return pests;
     }
 }

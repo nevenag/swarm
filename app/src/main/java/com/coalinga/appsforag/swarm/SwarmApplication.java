@@ -10,6 +10,9 @@ import com.parse.ParseObject;
  * Created by kylejorgensen on 4/18/15.
  */
 public class SwarmApplication extends Application {
+
+    static final String TAG = "SWARM";
+
     @Override
     public void onCreate(){
         super.onCreate();

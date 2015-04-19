@@ -1,10 +1,26 @@
 <resources>
-    <string name="app_name">swarm</string>
+    <string name="app_name">Swarm</string>
 
     <string name="have_you_seen">Have you seen?</string>
     <string name="my_area">My area</string>
     <string name="report">Report</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+
+    <string name="beet_armyworm">Beet Armyworm</string>
+    <string name="beet_leafhopper">Beet Leafhopper</string>
+    <string name="botrytis">Botrytis</string>
+    <string name="navel_orange_worm">Navel Orange Worm</string>
+    <string name="pacific_spider_mite">Pacific Spider Mite</string>
+    <string name="peach_twig_borer">Peach Twig Borer</string>
+    <string name="stink_bugs">Stink Bugs</string>
+    <string name="thrip">Thrip</string>
+    <string name="whitefly">Whitefly</string>
+    <string name="london_rocket">London Rocket</string>
+    <string name="powdery_mildew">Powdery Mildew</string>
+    <string name="russian_thistle">Russian Thistle</string>
+    <string name="aluminum_pipe_theft">Aluminum Pipe Theft</string>
+    <string name="copper_wire_theft">Copper Wire Theft</string>
+    <string name="honey_bee">Honey Bee</string>
 
 </resources>
