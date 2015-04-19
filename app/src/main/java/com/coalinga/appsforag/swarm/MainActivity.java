@@ -28,63 +28,65 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        currentId = 1;
+        reset();
 
         final Button buttonYes = (Button) findViewById(R.id.button_yes);
         buttonYes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // Acquire a reference to the system Location Manager
-                Log.i(SwarmApplication.TAG, "clicked YES");
-                LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-                // Define a listener that responds to location updates
-                LocationListener locationListener = new LocationListener() {
-                    public void onLocationChanged(Location location) {
-                        Log.i(SwarmApplication.TAG, "getting location");
-                        // Called when a new location is found by the network location provider.
-                        Event event = new Event();
-                        Log.i(SwarmApplication.TAG, "currentID " + currentId);
-                        event.setPestType(currentId);
-                        event.setLocation(new ParseGeoPoint(location.getLatitude(), location.getLongitude()));
-                        event.saveInBackground( new SaveCallback() {
-                                                  @Override
-                                                  public void done(ParseException e) {
-                                                      if (e == null) {
-                                                          Log.i(SwarmApplication.TAG, "Saved event");
-                                                      } else {
-                                                          Toast.makeText(
-                                                                  getApplicationContext(),
-                                                                  "Error saving: " + e.getMessage(),
-                                                                  Toast.LENGTH_SHORT).show();
-                                                      }
-                                                  }
-                                              }
-
-                        );
-                    }
-
-                    public void onStatusChanged(String provider, int status, Bundle extras) {}
-
-                    public void onProviderEnabled(String provider) {}
-
-                    public void onProviderDisabled(String provider) {}
-                };
-
-                // Register the listener with the Location Manager to receive location updates
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-
-                incrementImage();
+                saveEventWithLocation(true);
             }
         });
 
         final Button buttonNo = (Button) findViewById(R.id.button_no);
         buttonNo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.i(SwarmApplication.TAG, "current " +currentId);
-                incrementImage();
+                saveEventWithLocation(false);
             }
         });
+    }
+
+    /**
+     *
+     */
+    private void saveEventWithLocation(final boolean isYes){
+        // Acquire a reference to the system Location Manager
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        // Define a listener that responds to location updates
+        LocationListener locationListener = new LocationListener() {
+            public void onLocationChanged(Location location) {
+                // Called when a new location is found by the network location provider.
+                Event event = new Event();
+                event.setPestType(currentId);
+                event.putYes(isYes);
+                event.setLocation(new ParseGeoPoint(location.getLatitude(), location.getLongitude()));
+                event.saveEventually( new SaveCallback() {
+                                          @Override
+                                          public void done(ParseException e) {
+                                              if (e == null) {
+                                                  Log.i(SwarmApplication.TAG, "Saved event");
+                                                  incrementImage();
+                                              } else {
+                                                  Toast.makeText(
+                                                          getApplicationContext(),
+                                                          "Error saving: " + e.getMessage(),
+                                                          Toast.LENGTH_SHORT).show();
+                                              }
+                                          }
+                                      }
+
+                );
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            public void onProviderEnabled(String provider) {}
+
+            public void onProviderDisabled(String provider) {}
+        };
+
+        // Register the listener with the Location Manager to receive location updates
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
     }
 
     private void incrementImage() {
@@ -107,6 +109,9 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    private void reset(){
+        currentId = 1;
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

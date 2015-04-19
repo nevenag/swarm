@@ -51,6 +51,14 @@ public class Event extends ParseObject {
         return (ParseGeoPoint) get("location");
     }
 
+    public void putYes(boolean isYes){
+        put("isYes", isYes);
+    }
+
+    public boolean isYes() {
+        return getBoolean("isYes");
+    }
+
     public void setPestType(int id){
         put("type", id);
     }
