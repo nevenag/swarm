@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">swarm</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="have_you_seen">Have you seen?</string>
     <string name="action_settings">Settings</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
 </resources>
