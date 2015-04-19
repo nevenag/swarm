@@ -23,4 +23,17 @@
     <string name="copper_wire_theft">Copper Wire Theft</string>
     <string name="honey_bee">Honey Bee</string>
 
+    <string-array name="time_array">
+        <item>Last 7 days</item>
+        <item>Last 14 days</item>
+        <item>Last 30 days</item>
+    </string-array>
+
+    <string-array name="radius_array">
+        <item>Within 1 mile</item>
+        <item>Within 5 mile</item>
+        <item>Within 10 miles</item>
+        <item>Within 20 miles</item>
+    </string-array>
+
 </resources>
