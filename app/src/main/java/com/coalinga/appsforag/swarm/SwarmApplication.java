@@ -21,7 +21,7 @@ public class SwarmApplication extends Application {
         Parse.enableLocalDatastore(this);
 
         ParseObject.registerSubclass(Event.class);
-        Parse.initialize(this, "pFkYXbcL6hkdyxeaD862e53X4xWRMJJQSL3UvPQc", "rE6ma93oLVHSHjuGgOaKkHLDRn8DqRz20g9tHT0M");
+        Parse.initialize(this, "YOUR PARSE APP ID", "YOUR PARSE CLIENT KEY");
 
         // Save the current Installation to Parse. (useful for Push Notifications)
         ParseInstallation.getCurrentInstallation().saveInBackground();
