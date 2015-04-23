@@ -35,6 +35,7 @@ public class MainActivity extends ActionBarActivity {
         final Button buttonYes = (Button) findViewById(R.id.button_yes);
         buttonYes.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Log.i(SwarmApplication.TAG,"YES click");
                 saveEventWithLocation(true);
             }
         });
@@ -42,6 +43,7 @@ public class MainActivity extends ActionBarActivity {
         final Button buttonNo = (Button) findViewById(R.id.button_no);
         buttonNo.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Log.i(SwarmApplication.TAG,"NO click");
                 saveEventWithLocation(false);
             }
         });
@@ -53,10 +55,12 @@ public class MainActivity extends ActionBarActivity {
     private void saveEventWithLocation(final boolean isYes){
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Log.i(SwarmApplication.TAG,"Getting location");
 
         // Define a listener that responds to location updates
         LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
+                Log.i(SwarmApplication.TAG,"onLocationChanged event");
                 // Called when a new location is found by the network location provider.
                 Event event = new Event();
                 event.setPestType(currentId);
@@ -135,7 +139,6 @@ public class MainActivity extends ActionBarActivity {
             case R.id.my_area:
                 Intent intent = new Intent(this, MyAreaActivity.class);
                 startActivity(intent);
-                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
