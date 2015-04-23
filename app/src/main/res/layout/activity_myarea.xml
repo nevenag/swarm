@@ -31,7 +31,6 @@
             android:layout_width="0dp"
             android:layout_weight="0.3"
             android:layout_height="match_parent"
-            android:textAlignment="left"
             android:text="@string/have_you_seen"
             android:textSize="25sp"
             android:gravity="center_horizontal"/>
