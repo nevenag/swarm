@@ -53,8 +53,6 @@ public class MyAreaActivity extends ListActivity {
 
         currentEvents = new LinkedList<>();
 
-        runParseQuery(7, 1, null);
-
         Spinner time_spinner = (Spinner) findViewById(R.id.spinner_time);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> time_adapter = ArrayAdapter.createFromResource(this,
