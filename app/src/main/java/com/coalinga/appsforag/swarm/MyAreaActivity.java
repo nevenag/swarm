@@ -155,8 +155,7 @@ public class MyAreaActivity extends ListActivity {
 
         // Time
         Date now = new Date();
-        //int time = days*24*3600*1000;
-        int time = 3*3600*1000;
+        int time = days*24*3600*1000;
         now.setTime(now.getTime()-time);
         if (point == null) {
             Log.i(SwarmApplication.TAG, "point is null.");
